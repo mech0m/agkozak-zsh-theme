@@ -429,15 +429,26 @@ agkozak_zsh_theme() {
     psvar[1]=''
   fi
 
+  datePromt='%D{%a} %D{%H:%M:%S} %D{%y/%m/%d}'
+
   # When the user is a superuser, the username and hostname are
   # displayed in reverse video
   if _agkozak_has_colors; then
-    PS1='%(?..%B%F{red}(%?%)%f%b )%(!.%S%B.%B%F{green})%n%1v%(!.%b%s.%f%b) %B%F{blue}%2v%f%b $(_agkozak_vi_mode_indicator) '
+    PS1='%(?..%B%F{red}(%?%)%f%b )%(!.%S%B.%B%F{gray})%n%1v%(!.%b%s.%f%b) %F{yellow}$datePromt %f %B%F{blue}%2v%f%b  
+$(_agkozak_vi_mode_indicator) '
     RPS1='%F{yellow}%3v%f'
   else
-    PS1='%(?..(%?%) )%(!.%S.)%n%1v%(!.%s.) %2v $(_agkozak_vi_mode_indicator) '
+    PS1='%(?..(%?%) )%(!.%S.)%n%1v%(!.%s.) %2v $datePromt
+$(_agkozak_vi_mode_indicator) '
     RPS1='%3v'
   fi
+
+  # update promt for time update
+  TMOUT=1
+
+  TRAPALRM() {
+    zle reset-prompt
+  }
 
   if (( AGKOZAK_THEME_DEBUG )); then
     echo "agkozak-zsh-theme using async method: $AGKOZAK_ASYNC_METHOD"
