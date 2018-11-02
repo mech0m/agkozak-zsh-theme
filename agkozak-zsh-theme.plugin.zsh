@@ -444,7 +444,7 @@ $(_agkozak_vi_mode_indicator) '
   fi
 
   # update promt for time update
-  TMOUT=1
+  # TMOUT=1
 
   TRAPALRM() {
     zle reset-prompt
